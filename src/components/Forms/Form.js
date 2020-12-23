@@ -9,7 +9,7 @@ import { postPost } from "../../actions/posts";
 
 const Form = () => {
   const [postData, setPostData] = useState({
-    creator: "",
+    author: "",
     title: "",
     description: "",
     tags: "",
@@ -20,7 +20,6 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     dispatch(postPost(postData));
   };
 
@@ -29,13 +28,11 @@ const Form = () => {
       <form autoComplete="off" onSubmit={handleSubmit}>
         <Typography variant="h6">Create a memory</Typography>
         <TextField
-          name="creator"
+          name="author"
           label="Creator"
           fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
+          value={postData.author}
+          onChange={(e) => setPostData({ ...postData, author: e.target.value })}
         />
         <TextField
           name="title"

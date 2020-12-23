@@ -1,4 +1,4 @@
-import { fecthPost, postPost as post } from "../api";
+import { fecthPost, postPost1 } from "../api";
 import { CREATE_POST, FETCH_ALL_POST } from "../types";
 
 export const getPosts = () => async (dispatch) => {
@@ -12,7 +12,7 @@ export const getPosts = () => async (dispatch) => {
 
 export const postPost = (newPost) => async (dispatch) => {
   try {
-    const { data } = await post(newPost);
+    const { data } = await postPost1(newPost);
     dispatch({ type: CREATE_POST, payload: data });
   } catch (err) {
     console.log(err);

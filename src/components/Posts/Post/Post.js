@@ -15,9 +15,18 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { useStyles } from "./style";
 //moment
 import moment from "moment";
+//redux
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../../actions/posts";
 
 const Post = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const eliminar = (id) => {
+    dispatch(deletePost(id));
+    props.setCurrentId(null);
+  };
   return (
     <>
       <Card className={classes.root}>
@@ -58,7 +67,11 @@ const Post = (props) => {
           >
             Edit
           </Button>
-          <Button size="small" color="primary">
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => eliminar(props._id)}
+          >
             Delete
           </Button>
         </CardActions>

@@ -1,4 +1,9 @@
-import { FETCH_ALL_POST, CREATE_POST, UPDATE_POST } from "../types";
+import {
+  FETCH_ALL_POST,
+  CREATE_POST,
+  UPDATE_POST,
+  DELETE_POST,
+} from "../types";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -12,6 +17,9 @@ export default (state = [], action) => {
       return state.map((p) =>
         p._id === action.payload._id ? action.payload : p
       );
+
+    case DELETE_POST:
+      return state.filter((p) => p._id !== action.payload._id);
 
     default:
       return state;

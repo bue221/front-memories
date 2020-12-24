@@ -51,7 +51,9 @@ const Form = ({ currentId, setCurrentId }) => {
   return (
     <>
       <form autoComplete="off" onSubmit={handleSubmit} className={classes.form}>
-        <Typography variant="h6">Create a memory</Typography>
+        <Typography variant="h6">
+          {currentId ? "Edit" : "Create"} a memory
+        </Typography>
         <TextField
           name="author"
           label="Creator"
@@ -92,7 +94,7 @@ const Form = ({ currentId, setCurrentId }) => {
           />
         </div>
         <Button color="primary" size="large" type="submit" fullWidth>
-          Submit
+          {currentId ? "Edit" : "Create"}
         </Button>
         <Button color="secondary" size="large" onClick={clear} fullWidth>
           clear

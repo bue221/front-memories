@@ -13,12 +13,11 @@ import {
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { useStyles } from "./style";
-
+//moment
 import moment from "moment";
 
 const Post = (props) => {
   const classes = useStyles();
-  console.log(props);
   return (
     <>
       <Card className={classes.root}>
@@ -38,7 +37,7 @@ const Post = (props) => {
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.tags.map((tag) => `# ${tag}`)}
+            {props.tags && props.tags.map((tag) => `# ${tag}`)}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
             {props.title}
@@ -49,9 +48,14 @@ const Post = (props) => {
         </CardContent>
         <CardActions>
           <IconButton aria-label="add to favorites">
+            {props.likeCount}
             <FavoriteIcon />
           </IconButton>
-          <Button size="small" color="primary">
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => props.setCurrentId(props._id)}
+          >
             Edit
           </Button>
           <Button size="small" color="primary">

@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, TextField, Button } from "@material-ui/core";
 //styles
-//import { useStyles } from "./styles";
+import { useStyles } from "./styles";
+
 import FileBase from "react-file-base64";
 //redux
-import { useDispatch } from "react-redux";
-import { postPost } from "../../actions/posts";
+import { useDispatch, useSelector } from "react-redux";
+import { postPost, updatePost } from "../../actions/posts";
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     author: "",
     title: "",
@@ -15,17 +16,41 @@ const Form = () => {
     tags: "",
     selectedFile: "",
   });
-  //const classes = useStyles();
+  const classes = useStyles();
   const dispatch = useDispatch();
+  const posts = useSelector((state) =>
+    currentId ? state.post.find((p) => p._id === currentId) : null
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postPost(postData));
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+    } else {
+      dispatch(postPost(postData));
+    }
+    clear();
   };
+  const clear = () => {
+    setPostData({
+      author: "",
+      title: "",
+      description: "",
+      tags: "",
+      selectedFile: "",
+    });
+    setCurrentId(null);
+  };
+
+  useEffect(() => {
+    if (posts) {
+      setPostData(posts);
+    }
+  }, [posts]);
 
   return (
     <>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit} className={classes.form}>
         <Typography variant="h6">Create a memory</Typography>
         <TextField
           name="author"
@@ -68,6 +93,9 @@ const Form = () => {
         </div>
         <Button color="primary" size="large" type="submit" fullWidth>
           Submit
+        </Button>
+        <Button color="secondary" size="large" onClick={clear} fullWidth>
+          clear
         </Button>
       </form>
     </>

@@ -82,7 +82,9 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Tags"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          onChange={(e) =>
+            setPostData({ ...postData, tags: e.target.value.split(",") })
+          }
         />
         <div>
           <FileBase
@@ -93,10 +95,22 @@ const Form = ({ currentId, setCurrentId }) => {
             }
           />
         </div>
-        <Button color="primary" size="large" type="submit" fullWidth>
+        <Button
+          color="primary"
+          variant="outlined"
+          size="large"
+          type="submit"
+          fullWidth
+        >
           {currentId ? "Edit" : "Create"}
         </Button>
-        <Button color="secondary" size="large" onClick={clear} fullWidth>
+        <Button
+          color="secondary"
+          variant="outlined"
+          size="large"
+          onClick={clear}
+          fullWidth
+        >
           clear
         </Button>
       </form>

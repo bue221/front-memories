@@ -29,7 +29,6 @@ const Post = (props) => {
   };
 
   const like = (id) => {
-    console.log(id);
     dispatch(putPostLike(id));
   };
   return (

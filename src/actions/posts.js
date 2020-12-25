@@ -51,7 +51,6 @@ export const deletePost = (id) => async (dispatch) => {
 export const putPostLike = (id) => async (dispatch) => {
   try {
     const { data } = await putPostLiked(id);
-    console.log(data);
     dispatch({ type: UPDATE_POST, payload: data });
   } catch (err) {
     console.log(err);

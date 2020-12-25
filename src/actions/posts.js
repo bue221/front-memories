@@ -1,4 +1,10 @@
-import { deleteThePost, fecthPost, postPost1, putPost } from "../api";
+import {
+  deleteThePost,
+  fecthPost,
+  postPost1,
+  putPost,
+  putPostLiked,
+} from "../api";
 import {
   CREATE_POST,
   FETCH_ALL_POST,
@@ -37,6 +43,16 @@ export const deletePost = (id) => async (dispatch) => {
   try {
     const { data } = await deleteThePost(id);
     dispatch({ type: DELETE_POST, payload: data });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const putPostLike = (id) => async (dispatch) => {
+  try {
+    const { data } = await putPostLiked(id);
+    console.log(data);
+    dispatch({ type: UPDATE_POST, payload: data });
   } catch (err) {
     console.log(err);
   }

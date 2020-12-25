@@ -17,7 +17,7 @@ import { useStyles } from "./style";
 import moment from "moment";
 //redux
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../actions/posts";
+import { deletePost, putPostLike } from "../../../actions/posts";
 
 const Post = (props) => {
   const classes = useStyles();
@@ -26,6 +26,11 @@ const Post = (props) => {
   const eliminar = (id) => {
     dispatch(deletePost(id));
     props.setCurrentId(null);
+  };
+
+  const like = (id) => {
+    console.log(id);
+    dispatch(putPostLike(id));
   };
   return (
     <>
@@ -56,7 +61,10 @@ const Post = (props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton aria-label="add to favorites">
+          <IconButton
+            aria-label="add to favorites"
+            onClick={() => like(props._id)}
+          >
             {props.likeCount}
             <FavoriteIcon />
           </IconButton>
